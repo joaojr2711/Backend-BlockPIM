@@ -5,7 +5,7 @@ exports.up = function(knex) {
     table.string('type').notNullable();
     table.text('date').notNullable();
     table.decimal('value').notNullable();
-    
+    table.string('hash').notNullable();
     table.string('id_user').notNullable();
 
     table.foreign('id_user').references('id').inTable('users');

@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -12,16 +13,14 @@ module.exports = {
     try {
       const { title, value } = request.body;
       const id_user = request.headers.authorization;
-
+      const hash = crypto.randomBytes(25).toString('HEX');
       const date = new Date();
-      console.log(date);
 
       await connection('transactions').insert({
-        title, value, date, id_user
-      }).then(res => console.log(res)).catch(err => console.log(err));
+        title, value, date, id_user, hash
+      });
 
-
-      return response.send();
+      return response.json({ hash });
     } catch (err) {
       return response.status(400).json({ error: 'Error register new transaction' });
     }

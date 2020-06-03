@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -39,15 +40,16 @@ module.exports = {
     try {
       const { value, type } = request.body;
       const id_user = request.headers.authorization;
+      const hash = crypto.randomBytes(25).toString('HEX');
 
       const date = new Date();
 
-      const wallet = await connection('walletUser').insert({
-        value, date, type, id_user
+      await connection('walletUser').insert({
+        value, date, type, id_user, hash
       });
 
 
-      return response.json(wallet);
+      return response.json({ hash });
     } catch (err) {
       return response.status(400).json({ error: 'Error when making the deposit' });
     }
