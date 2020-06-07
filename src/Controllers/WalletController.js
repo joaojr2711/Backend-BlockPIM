@@ -42,7 +42,7 @@ module.exports = {
       const id_user = request.headers.authorization;
       const hash = crypto.randomBytes(25).toString('HEX');
 
-      const date = new Date();
+      const date = new Date().toLocaleString();
 
       await connection('walletUser').insert({
         value, date, type, id_user, hash
