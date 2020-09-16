@@ -4,6 +4,7 @@ exports.up = function(knex) {
     
     table.string('title').notNullable();
     table.text('date').notNullable();
+    table.string('type').notNullable();
     table.decimal('value').notNullable();
     table.string('hash').notNullable();
     table.string('id_user').notNullable();
