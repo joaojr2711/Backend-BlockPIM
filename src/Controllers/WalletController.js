@@ -4,33 +4,8 @@ const connection = require('../database/connection');
 module.exports = {
   async index(request, response) {
     const id_user = request.headers.authorization;
-    const investments_user = await connection('transactions').where('id_user', id_user).select('*');
     const wallet = await connection('walletUser').where('id_user', id_user).select('*');
 
-    const { incomeInvestment, outcomeInvestment } = investments_user.reduce(
-      (accummulator, transaction) => {
-        switch (transaction.type) {
-          case 'income':
-            accummulator.incomeInvestment += Number(transaction.value);
-            break;
-
-          case 'outcome':
-            accummulator.outcomeInvestment += Number(transaction.value);
-            break;
-
-          default:
-            break;
-        }
-
-        return accummulator;
-      },
-      {
-        incomeInvestment: 0,
-        outcomeInvestment: 0,
-        total: 0,
-      },
-    );
-    const totalInvestment = incomeInvestment - outcomeInvestment;
     const { income, outcome } = wallet.reduce(
       (accummulator, transaction) => {
         switch (transaction.type) {
@@ -55,8 +30,8 @@ module.exports = {
       },
     );
     const total = income - outcome;
-    const totalWallet = total - totalInvestment;
-    return response.json({ wallet, income, outcome, totalWallet });
+
+    return response.json({ wallet, income, outcome, total });
 
     // return response.json(wallet);
   },

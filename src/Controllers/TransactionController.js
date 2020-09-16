@@ -11,13 +11,13 @@ module.exports = {
 
   async create(request, response) {
     try {
-      const { title, value, type } = request.body;
+      const { title, value } = request.body;
       const id_user = request.headers.authorization;
       const hash = crypto.randomBytes(25).toString('HEX');
       const date = new Date();
 
       await connection('transactions').insert({
-        title, value, date, type, id_user, hash
+        title, value, date, id_user, hash
       });
 
       return response.json({ hash });
