@@ -2,7 +2,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('transactions', function(table){
     table.increments();
     
-    table.string('title').notNullable();
+    table.string('name').notNullable();
     table.text('date').notNullable();
     table.string('type').notNullable();
     table.decimal('value').notNullable();

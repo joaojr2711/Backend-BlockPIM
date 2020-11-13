@@ -57,8 +57,6 @@ module.exports = {
     const total = income - outcome;
     const totalWallet = total - totalInvestment;
     return response.json({ wallet, income, outcome, totalWallet });
-
-    // return response.json(wallet);
   },
 
   async create(request, response) {

@@ -20,9 +20,9 @@ routes.delete('/users/:id', UsersController.delete);
 
 routes.get('/transaction', TransactionController.index);
 routes.post('/transaction', TransactionController.create);
+routes.get('/transactionCriptos', TransactionController.filter);
 
 routes.get('/wallet', WalletController.index);
 routes.post('/wallet', WalletController.create);
-
 
 module.exports = routes;
