@@ -10,6 +10,10 @@ const TransactionController = require('./Controllers/TransactionController');
 //rota de carteiras - OK
 const WalletController = require('./Controllers/WalletController');
 
+//rota de admin
+const AdminController = require('./Controllers/AdminController');
+
+
 const routes = express.Router();
 
 routes.post('/sessions', SessionController.create);
@@ -24,5 +28,8 @@ routes.get('/transactionCriptos', TransactionController.filter);
 
 routes.get('/wallet', WalletController.index);
 routes.post('/wallet', WalletController.create);
+
+routes.get('/adm',AdminController.countUsers);
+routes.get('/admHistory',AdminController.history);
 
 module.exports = routes;

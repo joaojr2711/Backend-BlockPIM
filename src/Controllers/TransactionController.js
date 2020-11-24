@@ -16,7 +16,7 @@ module.exports = {
       const { title, value, type } = request.body;
       const id_user = request.headers.authorization;
       const hash = crypto.randomBytes(25).toString("HEX");
-      const date = new Date();
+      const date = new Date().toLocaleString();
       const name = title;
 
       await connection("transactions").insert({
